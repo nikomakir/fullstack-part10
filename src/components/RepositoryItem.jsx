@@ -1,14 +1,56 @@
-import { Text, View } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
+import RepositoryStats from "./RepositoryStats";
+import RepositoryInfo from "./RepositoryInfo";
+import theme from "../theme";
 
-const RepositoryItem = ({repository}) => (
-  <View>
-    <Text>Full name: {repository.fullName}</Text>
-    <Text>Description: {repository.description}</Text>
-    <Text>Language: {repository.language}</Text>
-    <Text>Stars: {repository.stargazersCount}</Text>
-    <Text>Forks: {repository.forksCount}</Text>
-    <Text>Reviews: {repository.reviewCount}</Text>
-    <Text>Rating: {repository.ratingAverage}</Text>
+const styles = StyleSheet.create({
+  flexContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'left',
+    paddingTop: 10,
+  },
+  flexItemImage: {
+    flexGrow: 0,
+    padding: 15,
+  },
+  flexItemInfo: {
+    flexGrow: 1,
+    padding: 15,
+  },
+  ownerLogo: {
+    width: 50,
+    height: 50,
+  },
+  backGround: {
+    backgroundColor: 'white',
+  }
+});
+
+const RepositoryItem = ({ repository }) => (
+  <View style={styles.backGround}>
+    <View style={styles.flexContainer}>
+      <View style={styles.flexItemImage}>
+        <Image
+          style={styles.ownerLogo}
+          source={{ uri: repository.ownerAvatarUrl }}
+        />
+      </View>
+      <View style={styles.flexItemInfo}>
+        <RepositoryInfo
+          name={repository.fullName}
+          descpription={repository.description}
+          language={repository.language}
+        />
+      </View>
+    </View>
+    <RepositoryStats
+        stars={repository.stargazersCount}
+        forks={repository.forksCount}
+        reviews={repository.reviewCount}
+        rating={repository.ratingAverage}
+      />
   </View>
 );
 
