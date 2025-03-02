@@ -1,7 +1,7 @@
 import { View, StyleSheet, Image } from "react-native";
 import RepositoryStats from "./RepositoryStats";
 import RepositoryInfo from "./RepositoryInfo";
-import theme from "../theme";
+
 
 const styles = StyleSheet.create({
   flexContainer: {
