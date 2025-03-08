@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const [signOut, query] = useSignOut();
+  const { data } = query;
+  const currentUser = data?.me;
 
   return (
     <View style={styles.container}>
@@ -28,7 +30,7 @@ const AppBar = () => {
             Repositories
           </Text>
         </Link>
-        {!query.loading && query.data.me ?
+        {currentUser ?
         (<Pressable onPress={signOut}>
           <Text fontSize="subHeading" style={styles.text}>
             Sign out
