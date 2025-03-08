@@ -1,10 +1,8 @@
 import { TextInput, Pressable, View, StyleSheet } from 'react-native';
-import Text from './Text';
+import Text from '../Text';
 import { useFormik } from 'formik';
-import theme from '../theme';
+import theme from '../../theme';
 import * as yup from 'yup';
-import useSignIn from '../hooks/useSignIn';
-import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -98,23 +96,4 @@ const SignInForm =({ onSubmit }) => {
   );
 };
 
-const SignIn = () => {
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
-
-  const onSubmit = async (values) => {
-    const { username, password } = values;
-
-    try {
-      const { data } = await signIn({ username, password });
-      console.log(data);
-      navigate('/', { replace: true });
-    } catch (e) {
-      console.log(e);
-    };
-  };
-
-  return <SignInForm onSubmit={onSubmit} />;
-};
-
-export default SignIn;
+export default SignInForm;
