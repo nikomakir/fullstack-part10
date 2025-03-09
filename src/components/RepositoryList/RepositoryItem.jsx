@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryItem = ({ repository }) => (
-  <View style={styles.backGround}>
+  <View style={styles.backGround} testID="repositoryItem">
     <View style={styles.flexContainer}>
       <View style={styles.flexItemImage}>
         <Image

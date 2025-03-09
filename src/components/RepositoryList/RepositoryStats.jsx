@@ -35,19 +35,19 @@ const RepositoryStats = ({ stars, forks, reviews, rating }) => {
 
   return (
     <View style={styles.flexContainer}>
-      <View style={styles.flexItem}>
+      <View style={styles.flexItem} testID="repositoryStars">
         <Text fontWeight='bold'>{starsText}</Text>
         <Text>Stars</Text>
       </View>
-      <View style={styles.flexItem}>
+      <View style={styles.flexItem} testID="repositoryForks">
         <Text fontWeight='bold'>{forksText}</Text>
         <Text>Forks</Text>
       </View>
-      <View style={styles.flexItem}>
+      <View style={styles.flexItem} testID="repositoryReviews">
         <Text fontWeight='bold'>{reviewsText}</Text>
         <Text>Reviews</Text>
       </View>
-      <View style={styles.flexItem}>
+      <View style={styles.flexItem} testID="repositoryRating">
         <Text fontWeight='bold'>{ratingText}</Text>
         <Text>Rating</Text>
       </View>
