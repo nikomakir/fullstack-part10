@@ -1,6 +1,9 @@
 import { gql } from "@apollo/client";
 
-import { REPOSITORY_BASE_FIELDS, USER_BASE_FIELDS } from './fragments';
+import {
+  REPOSITORY_BASE_FIELDS,
+  USER_BASE_FIELDS,
+  REVIEW_BASE_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
   query {
@@ -34,8 +37,21 @@ export const GET_SINGLE_REPOSITORY = gql`
       ...repositoryBaseFields
       ratingAverage
       reviewCount
+      reviews {
+        edges {
+          node {
+            ...reviewBaseFields
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 
   ${REPOSITORY_BASE_FIELDS}
+
+  ${REVIEW_BASE_FIELDS}
 `;
