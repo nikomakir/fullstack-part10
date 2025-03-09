@@ -27,3 +27,15 @@ export const GET_CURRENT_USER = gql`
 
   ${USER_BASE_FIELDS}
 `;
+
+export const GET_SINGLE_REPOSITORY = gql`
+  query Repository($repositoryId: ID!) {
+    repository(id: $repositoryId) {
+      ...repositoryBaseFields
+      ratingAverage
+      reviewCount
+    }
+  }
+
+  ${REPOSITORY_BASE_FIELDS}
+`;
