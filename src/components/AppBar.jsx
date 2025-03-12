@@ -49,6 +49,13 @@ const AppBar = () => {
             </Text>
           </Link>
         )}
+        {!currentUser && (
+          <Link to="/signup">
+            <Text fontSize="subHeading" style={styles.text}>
+              Sign up
+            </Text>
+          </Link>
+        )}
       </ScrollView>
     </View>
   );

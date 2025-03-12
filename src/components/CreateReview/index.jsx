@@ -5,7 +5,7 @@ import { CREATE_REVIEW } from '../../graphql/mutations';
 import ReviewForm from "./ReviewForm";
 
 const CreateReview = () => {
-  const [mutate, result] = useMutation(CREATE_REVIEW);
+  const [mutate] = useMutation(CREATE_REVIEW);
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
