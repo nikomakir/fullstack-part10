@@ -30,17 +30,25 @@ const AppBar = () => {
             Repositories
           </Text>
         </Link>
+        {currentUser && (
+          <Link to="/review">
+            <Text fontSize="subHeading" style={styles.text}>
+              Create a review
+            </Text>
+          </Link>
+        )}
         {currentUser ?
-        (<Pressable onPress={signOut}>
-          <Text fontSize="subHeading" style={styles.text}>
-            Sign out
-          </Text>
-        </Pressable>) :
-        (<Link to="/signin">
-          <Text fontSize="subHeading" style={styles.text}>
-            Sign in
-          </Text>
-        </Link>)}
+          (<Pressable onPress={signOut}>
+            <Text fontSize="subHeading" style={styles.text}>
+              Sign out
+            </Text>
+          </Pressable>) :
+          (<Link to="/signin">
+            <Text fontSize="subHeading" style={styles.text}>
+              Sign in
+            </Text>
+          </Link>
+        )}
       </ScrollView>
     </View>
   );

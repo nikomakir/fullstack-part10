@@ -19,6 +19,7 @@ const createApolloClient = (authStorage) => {
         },
       };
     } catch (e) {
+      // eslint-disable-next-line no-undef
       console.log(e);
       return {
         headers,

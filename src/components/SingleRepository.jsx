@@ -57,9 +57,11 @@ const ReviewItem = ({ review }) => (
       <Text style={styles.reviewCreated}>
         {format(review.createdAt, 'dd.MM.yyyy')}
       </Text>
-      <Text style={styles.reviewText}>
+      {review.text && (
+        <Text style={styles.reviewText}>
         {review.text}
-      </Text>
+        </Text>
+      )}
     </View>
   </View>
 );
