@@ -21,9 +21,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, order, setOrder, search, setSearch }) => {
-  const navigate = useNavigate();
-
+export const RepositoryListContainer = ({ navigate, repositories, order, setOrder, search, setSearch }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -55,6 +53,7 @@ export const RepositoryListContainer = ({ repositories, order, setOrder, search,
 };
 
 const RepositoryList = () => {
+  const navigate = useNavigate();
   const [order, setOrder] = useState('Latest repositories');
   const [search, setSearch] = useState('');
   const [searchKeyword] = useDebounce(search, 500);
@@ -66,6 +65,7 @@ const RepositoryList = () => {
 
   return (
     <RepositoryListContainer
+      navigate={navigate}
       repositories={repositories}
       order={order}
       setOrder={setOrder}
