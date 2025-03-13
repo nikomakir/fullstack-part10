@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   listHeaderComponent: {
     padding: 15,
   },
+  searchBar: {
+    backgroundColor: 'white',
+  },
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -37,7 +40,7 @@ export const RepositoryListContainer = ({ repositories, order, setOrder, search,
       keyExtractor={item => item.id}
       ListHeaderComponent={
         <View style={styles.listHeaderComponent}>
-          <Searchbar placeholder='Search' onChangeText={setSearch} value={search} />
+          <Searchbar style={styles.searchBar} placeholder='Search' onChangeText={setSearch} value={search} />
           <Picker
             selectedValue={order}
             onValueChange={(itemValue) => setOrder(itemValue)}>

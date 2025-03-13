@@ -22,13 +22,24 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_CURRENT_USER = gql`
-  query {
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       ...userBaseFields
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            ...reviewBaseFields
+            repository {
+              fullName
+            }
+          }
+        }
+      }
     }
   }
 
   ${USER_BASE_FIELDS}
+  ${REVIEW_BASE_FIELDS}
 `;
 
 export const GET_SINGLE_REPOSITORY = gql`

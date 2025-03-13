@@ -37,6 +37,13 @@ const AppBar = () => {
             </Text>
           </Link>
         )}
+        {currentUser && (
+          <Link to="/userreviews">
+            <Text fontSize="subHeading" style={styles.text}>
+              My reviews
+            </Text>
+          </Link>
+        )}
         {currentUser ?
           (<Pressable onPress={signOut}>
             <Text fontSize="subHeading" style={styles.text}>
