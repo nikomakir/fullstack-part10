@@ -4,16 +4,21 @@ import { useState, useEffect } from 'react';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import { Picker } from '@react-native-picker/picker';
+import { Searchbar } from 'react-native-paper';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+  listHeaderComponent: {
+    padding: 15,
+  },
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
+export const RepositoryListContainer = ({ repositories, order, setOrder, search, setSearch }) => {
   const navigate = useNavigate();
 
   const repositoryNodes = repositories
@@ -31,13 +36,16 @@ export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
       )}
       keyExtractor={item => item.id}
       ListHeaderComponent={
-        <Picker
-          selectedValue={order}
-          onValueChange={(itemValue) => setOrder(itemValue)}>
-            <Picker.Item label='Latest repositories' value={'Latest repositories'} />
-            <Picker.Item label='Highest rated repositories' value={'Highest rated repositories'} />
-            <Picker.Item label='Lowest rated repositories' value={'Lowest rated repositories'} />
-        </Picker>
+        <View style={styles.listHeaderComponent}>
+          <Searchbar placeholder='Search' onChangeText={setSearch} value={search} />
+          <Picker
+            selectedValue={order}
+            onValueChange={(itemValue) => setOrder(itemValue)}>
+              <Picker.Item label='Latest repositories' value={'Latest repositories'} />
+              <Picker.Item label='Highest rated repositories' value={'Highest rated repositories'} />
+              <Picker.Item label='Lowest rated repositories' value={'Lowest rated repositories'} />
+          </Picker>
+        </View>
       }
     />
   );
@@ -45,13 +53,23 @@ export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
 
 const RepositoryList = () => {
   const [order, setOrder] = useState('Latest repositories');
-  const { repositories, refetch } = useRepositories(order);
+  const [search, setSearch] = useState('');
+  const [searchKeyword] = useDebounce(search, 500);
+  const { repositories, refetch } = useRepositories({ order, searchKeyword });
 
   useEffect(() => {
     refetch();
-  }, [order]);
+  }, [order, searchKeyword]);
 
-  return <RepositoryListContainer repositories={repositories} order={order} setOrder={setOrder} />;
+  return (
+    <RepositoryListContainer
+      repositories={repositories}
+      order={order}
+      setOrder={setOrder}
+      search={search}
+      setSearch={setSearch}
+    />
+  );
 };
 
 export default RepositoryList;
